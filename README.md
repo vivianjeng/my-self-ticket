@@ -69,6 +69,7 @@ STRIPE_WEBHOOK_SECRET="your-stripe-webhook-secret"
    ```bash
    yarn prisma generate
    yarn prisma db push
+   yarn prisma:seed
    ```
 
 4. Start the development server:

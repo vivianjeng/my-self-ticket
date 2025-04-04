@@ -54,7 +54,7 @@ export default function SeatSelection({ event }: SeatSelectionProps) {
             }`}
             disabled={ticket.status !== 'AVAILABLE'}
           >
-            {ticket.id.slice(-1)}
+            {}
           </button>
         ))}
       </div>

@@ -38,15 +38,18 @@ model Event {
 }
 
 model Ticket {
-  id        String   @id @default(cuid())
-  eventId   String
-  event     Event    @relation(fields: [eventId], references: [id])
-  userId    String?
-  user      User?    @relation(fields: [userId], references: [id])
-  status    String   @default("AVAILABLE")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  orders    Order[]
+  id          String   @id @default(cuid())
+  eventId     String
+  event       Event    @relation(fields: [eventId], references: [id])
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+  status      String   @default("AVAILABLE")
+  seatNumber  Int
+  row         Int
+  section     Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  orders      Order[]
 }
 
 model Order {

@@ -75,13 +75,53 @@ async function main() {
     },
   ];
 
-  // First, delete all existing events to avoid duplicates
+  // First, delete all existing events and tickets to avoid duplicates
+  await prisma.ticket.deleteMany();
   await prisma.event.deleteMany();
 
-  // Then create new events
-  for (const event of events) {
-    await prisma.event.create({
-      data: event,
+  // Create events and their tickets
+  for (const eventData of events) {
+    const event = await prisma.event.create({
+      data: eventData,
+    });
+
+    // Create tickets for this event
+    for (let i = 1; i <= eventData.totalSeats; i++) {
+      await prisma.ticket.create({
+        data: {
+          eventId: event.id,
+          status: 'AVAILABLE',
+          seatNumber: i,
+          row: Math.ceil(i / 10), // 10 seats per row
+          section: Math.ceil(Math.ceil(i / 10) / 5), // 5 rows per section
+        },
+      });
+    }
+  }
+
+  // Create some sold tickets for the test user
+  const testEvent = await prisma.event.findFirst();
+  if (testEvent) {
+    // Get 3 available tickets
+    const availableTickets = await prisma.ticket.findMany({
+      where: {
+        eventId: testEvent.id,
+        status: 'AVAILABLE',
+      },
+      take: 3,
+    });
+
+    // Update the tickets to sold status
+    await prisma.ticket.updateMany({
+      where: {
+        id: {
+          in: availableTickets.map(ticket => ticket.id),
+        },
+      },
+      data: {
+        status: 'SOLD',
+        userId: user.id,
+      },
     });
   }
 
