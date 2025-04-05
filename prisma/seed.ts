@@ -26,7 +26,7 @@ async function main() {
       price: 150,
       totalSeats: 100,
       availableSeats: 100,
-      imageUrl: 'https://example.com/taylor-swift.jpg',
+      imageUrl: 'https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/AF17905AA41300F0921FAF50947D286E3C13FD4B058C5F0C48F2F4C25D73A5B4/scale?width=1200&aspectRatio=1.78&format=webp',
     },
     {
       title: 'Ed Sheeran - Mathematics Tour',
@@ -37,7 +37,7 @@ async function main() {
       price: 120,
       totalSeats: 80,
       availableSeats: 80,
-      imageUrl: 'https://example.com/ed-sheeran.jpg',
+      imageUrl: 'https://m.economictimes.com/thumb/msid-104632583,width-1200,height-900,resizemode-4,imgsize-100092/ed-sheeran-2024-mathematics-asia-tour-tickets-dates-venues-and-more.jpg',
     },
     {
       title: 'Beyoncé - Renaissance World Tour',
@@ -48,7 +48,7 @@ async function main() {
       price: 200,
       totalSeats: 120,
       availableSeats: 120,
-      imageUrl: 'https://example.com/beyonce.jpg',
+      imageUrl: 'https://i1.sndcdn.com/artworks-ZuepyRJ1oPpRCgwM-2tBZ0Q-t500x500.jpg',
     },
     {
       title: 'Coldplay - Music of the Spheres',
@@ -59,7 +59,7 @@ async function main() {
       price: 180,
       totalSeats: 150,
       availableSeats: 150,
-      imageUrl: 'https://example.com/coldplay.jpg',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/en/7/79/Music_of_the_Spheres_World_Tour_Poster.png',
     },
     {
       title: 'Drake - It\'s All A Blur Tour',
@@ -70,7 +70,7 @@ async function main() {
       price: 160,
       totalSeats: 90,
       availableSeats: 90,
-      imageUrl: 'https://example.com/drake.jpg',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/en/b/b3/Drake_%26_21_Savage_2023_tour_poster.jpg',
     },
   ];
 
