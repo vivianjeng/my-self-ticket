@@ -10,7 +10,9 @@ In this project, we use the [**Self Protocol**](https://self.xyz/) to address th
 
 2. [Celo](https://celo.org/): Celo is a public blockchain that not only stores data but also supports on-chain verification of zk-proofs, allowing anyone to verify the correctness of the proof.
     - The contract repository: https://github.com/vivianjeng/my-self-ticket-contract
-    - The contract is deployed at: [0xB7dFdc91906E0EC28259C9f6dF55D8234f8a26F2](https://alfajores.celoscan.io/address/0xB7dFdc91906E0EC28259C9f6dF55D8234f8a26F2)
+    - The contract is deployed at:
+        - Celo Mainnet: [0xF4205f466De67CA37d820504eb3c81bb89081214](https://celoscan.io/address/0xF4205f466De67CA37d820504eb3c81bb89081214)
+        - Cele Alfajores:[0x9C060e2200dF127cAb5E3d5Cc5824292604c1391](https://alfajores.celoscan.io/address/0x9C060e2200dF127cAb5E3d5Cc5824292604c1391)
 
 ## Features
 
