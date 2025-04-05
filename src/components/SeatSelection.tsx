@@ -121,7 +121,7 @@ export default function SeatSelection({ event: initialEvent }: SeatSelectionProp
                       ? 'bg-indigo-600 text-white'
                       : ticket.status === 'AVAILABLE'
                       ? 'bg-gray-200 hover:bg-gray-300'
-                      : 'bg-red-200 cursor-not-allowed'
+                      : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                   }`}
                   disabled={ticket.status !== 'AVAILABLE'}
                   title={`Row ${row}, Seat ${ticket.seatNumber}`}
@@ -151,16 +151,16 @@ export default function SeatSelection({ event: initialEvent }: SeatSelectionProp
               <span className="text-sm">Selected</span>
             </div>
             <div className="flex items-center">
-              <div className="w-4 h-4 bg-red-200 rounded-full mr-2"></div>
+              <div className="w-4 h-4 bg-gray-100 rounded-full mr-2"></div>
               <span className="text-sm">Unavailable</span>
             </div>
           </div>
         </div>
-        <div className="flex justify-end">
+        <div className="flex justify-center mt-4">
           <button
             onClick={handlePurchase}
             disabled={isLoading || selectedSeats.length === 0}
-            className="px-6 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 disabled:bg-gray-400 text-sm font-medium"
+            className="w-full max-w-xs px-6 py-3 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 disabled:bg-gray-400 text-sm font-medium"
           >
             {isLoading ? 'Processing...' : 'Purchase Tickets'}
           </button>
