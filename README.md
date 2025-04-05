@@ -8,6 +8,10 @@ In this project, we use the [**Self Protocol**](https://self.xyz/) to address th
 
 1. [Self Protocol](https://self.xyz/): Self Protocol offers both a mobile app and a TypeScript SDK for building websites and enabling interaction with the mobile app. The website displays a QR code that the mobile app can scan, initiating a WebSocket session. Once the session is established, the mobile app generates a Zero-Knowledge (ZK) proof, which is processed by an endpoint defined in the SDK. The endpoint then handles the data and returns either a success or failure response.
 
+2. [Celo](https://celo.org/): Celo is a public blockchain that not only stores data but also supports on-chain verification of zk-proofs, allowing anyone to verify the correctness of the proof.
+    - The contract repository: https://github.com/vivianjeng/my-self-ticket-contract
+    - The contract is deployed at: [0xB7dFdc91906E0EC28259C9f6dF55D8234f8a26F2](https://alfajores.celoscan.io/address/0xB7dFdc91906E0EC28259C9f6dF55D8234f8a26F2)
+
 ## Features
 
 1. **Login:** Users can simply use the Self Protocol app to log in to the My Self Ticket website.
