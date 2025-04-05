@@ -8,19 +8,30 @@ export async function GET(
   try {
     const event = await prisma.event.findUnique({
       where: { id: params.id },
-      include: {
+      select: {
+        id: true,
+        title: true,
+        imageUrl: true,
+        date: true,
+        description: true,
+        price: true,
+        availableSeats: true,
         tickets: {
-          orderBy: [
-            { row: 'asc' },
-            { seatNumber: 'asc' }
-          ]
+          where: {
+            status: 'UNAVAILABLE',
+          },
+          select: {
+            id: true,
+            row: true,
+            seatNumber: true,
+          },
         },
       },
     });
 
     if (!event) {
       return NextResponse.json(
-        { message: 'Event not found' },
+        { error: 'Event not found' },
         { status: 404 }
       );
     }
@@ -29,7 +40,7 @@ export async function GET(
   } catch (error) {
     console.error('Error fetching event:', error);
     return NextResponse.json(
-      { message: 'Error fetching event' },
+      { error: 'Failed to fetch event' },
       { status: 500 }
     );
   }
