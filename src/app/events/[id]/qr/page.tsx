@@ -2,17 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import SelfQRcodeWrapper, { SelfApp, SelfAppBuilder } from "@selfxyz/qrcode";
 import { v4 as uuidv4 } from "uuid";
-import { signIn } from "next-auth/react";
 
 interface VerificationResult {
-    proof: any;
-    publicSignals: any;
-}
-
-interface SelfVerificationResult {
     proof: {
         a: string[];
         b: string[][];
@@ -23,9 +16,7 @@ interface SelfVerificationResult {
 
 export default function QRCodePage({ params }: { params: { id: string } }) {
     const router = useRouter();
-    const [error, setError] = useState<string | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [verificationResult, setVerificationResult] =
+    const [verificationResult] =
         useState<VerificationResult | null>(null);
     const [userId, setUserId] = useState<string | null>(null);
     const [eventName, setEventName] = useState<string>("");

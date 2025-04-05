@@ -1,11 +1,21 @@
 import { NextResponse } from 'next/server';
-import { hash } from 'bcryptjs';
 import { prisma } from '@/lib/prisma';
-import { getUserIdentifier, SelfBackendVerifier } from '@selfxyz/core';
-import { ethers } from 'ethers';
-import { abi } from '@/app/content/abi';
+import { SelfBackendVerifier } from '@selfxyz/core';
 
-let lastVerificationResult: any = null;
+interface VerificationResult {
+    status: 'success' | 'error';
+    result: boolean;
+    user?: {
+        id: string;
+        passportNumber: string;
+        name: string | null;
+        dateOfBirth: string;
+    };
+    message?: string;
+    error?: string;
+}
+
+let lastVerificationResult: VerificationResult | null = null;
 
 export async function POST(request: Request) {
     try {
@@ -19,7 +29,7 @@ export async function POST(request: Request) {
         console.log("Public signals:", JSON.stringify(publicSignals, null, 2));
 
         // Contract details
-        const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+        // const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
         const endpoint = `${process.env.SELF_ENDPOINT}/api/verify`;
 
         // Uncomment this to use the Self backend verifier for offchain verification instead

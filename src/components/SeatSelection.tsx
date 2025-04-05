@@ -1,8 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 
 interface Event {
   id: string;
@@ -25,7 +24,7 @@ export default function SeatSelection({ event: initialEvent }: SeatSelectionProp
   const [isLoading, setIsLoading] = useState(false);
   const [event, setEvent] = useState(initialEvent);
   const router = useRouter();
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
   const fetchEventData = async () => {
     try {

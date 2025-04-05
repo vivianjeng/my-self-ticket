@@ -3,6 +3,7 @@ import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { redirect } from 'next/navigation';
 import { format } from 'date-fns';
+import Link from 'next/link';
 
 interface SessionUser {
   id: string;
@@ -43,13 +44,13 @@ export default async function MyTicketsPage() {
       <h1 className="text-4xl font-bold mb-8">My Tickets</h1>
       {tickets.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-600">You haven't purchased any tickets yet.</p>
-          <a
+          <p className="text-gray-600">You haven&apos;t purchased any tickets yet.</p>
+          <Link
             href="/"
             className="inline-block mt-4 text-indigo-600 hover:text-indigo-700"
           >
             Browse Events
-          </a>
+          </Link>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

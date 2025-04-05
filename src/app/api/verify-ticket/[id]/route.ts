@@ -1,19 +1,36 @@
-import { NextResponse } from 'next/server';
-import { hash } from 'bcryptjs';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { getUserIdentifier, SelfBackendVerifier } from '@selfxyz/core';
-import { ethers } from 'ethers';
-import { abi } from '@/app/content/abi';
+import { SelfBackendVerifier } from '@selfxyz/core';
 
-let lastVerificationResult: any = null;
+interface Ticket {
+    id: string;
+    status: string;
+    row: number;
+    seatNumber: number;
+}
+interface VerificationResult {
+    status: 'success' | 'error';
+    result: boolean;
+    user?: {
+        id: string;
+        passportNumber: string;
+        name: string | null;
+        dateOfBirth: string;
+    };
+    hasTicket?: boolean;
+    tickets?: Ticket[];
+    message?: string;
+    error?: string;
+}
 
-export async function POST(
-    request: Request,
-    { params }: { params: { id: string } }
-) {
+let lastVerificationResult: VerificationResult | null = null;
+
+export async function POST(req: NextRequest) {
+    const id = req.nextUrl.pathname.split('/').pop(); // crude way to get [id]
+
     try {
-        const eventId = params.id;
-        const { proof, publicSignals } = await request.json();
+        const eventId = id;
+        const { proof, publicSignals } = await req.json();
 
         if (!proof || !publicSignals) {
             return NextResponse.json({ message: 'Proof and publicSignals are required' }, { status: 400 });
@@ -23,7 +40,7 @@ export async function POST(
         console.log("Public signals:", JSON.stringify(publicSignals, null, 2));
 
         // Contract details
-        const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+        // const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
         const endpoint = `${process.env.SELF_ENDPOINT}/api/verify`;
 
         // Uncomment this to use the Self backend verifier for offchain verification instead
@@ -105,13 +122,12 @@ export async function POST(
     }
 }
 
-export async function GET(
-    request: Request,
-    { params }: { params: { id: string } }
-) {
+export async function GET(req: NextRequest) {
+    const id = req.nextUrl.pathname.split('/').pop(); // crude way to get [id]
+
     try {
-        const eventId = params.id;
-        const { searchParams } = new URL(request.url);
+        const eventId = id;
+        const { searchParams } = new URL(req.url);
         const userId = searchParams.get('userId');
 
         if (!userId) {

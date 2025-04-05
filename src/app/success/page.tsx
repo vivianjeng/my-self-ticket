@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
+import Link from 'next/link';
 
 export default function SuccessPage() {
   const searchParams = useSearchParams();
@@ -41,7 +42,7 @@ export default function SuccessPage() {
       } catch (error) {
         toast({
           title: 'Error',
-          description: 'Failed to confirm payment. Please contact support.',
+          description: JSON.stringify(error),
           variant: 'destructive',
         });
       } finally {
@@ -70,12 +71,12 @@ export default function SuccessPage() {
         <p className="text-gray-600 mb-8">
           Thank you for your purchase. Your tickets have been confirmed.
         </p>
-        <a
+        <Link
           href="/"
           className="inline-block bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700"
         >
           Return to Home
-        </a>
+        </Link>
       </div>
     </div>
   );

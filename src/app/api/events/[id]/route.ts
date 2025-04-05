@@ -1,13 +1,12 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(req: NextRequest) {
+  const id = req.nextUrl.pathname.split('/').pop(); // crude way to get [id]
+
   try {
     const event = await prisma.event.findUnique({
-      where: { id: params.id },
+      where: { id: id },
       select: {
         id: true,
         title: true,

@@ -54,7 +54,7 @@ export default function PaymentForm({ event }: PaymentFormProps) {
     } catch (error) {
       toast({
         title: 'Error',
-        description: 'Something went wrong. Please try again.',
+        description: JSON.stringify(error),
         variant: 'destructive',
       });
     } finally {
