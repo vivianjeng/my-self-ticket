@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { getUserIdentifier, SelfBackendVerifier } from '@selfxyz/core';
+import { SelfBackendVerifier } from '@selfxyz/core';
 import { abi } from '@/app/content/abi';
 import { ethers } from 'ethers';
 
@@ -53,7 +53,7 @@ export async function POST(request: Request) {
         if (!contractAddress) {
             return NextResponse.json({ message: 'Contract address not found' }, { status: 400 });
         }
-        const address = await getUserIdentifier(publicSignals, "hex");
+        // const address = await getUserIdentifier(publicSignals, "hex");
         const provider = new ethers.JsonRpcProvider(process.env.RPC_URL);
         const signer = new ethers.Wallet(process.env.PRIVATE_KEY!, provider);
         const contract = new ethers.Contract(contractAddress, abi, signer);
