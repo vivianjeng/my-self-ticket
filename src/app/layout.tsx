@@ -8,7 +8,7 @@ import Navigation from "@/components/Navigation";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "TicketHub - Buy and Sell Event Tickets",
+  title: "My Self Ticket - Buy and Sell Event Tickets",
   description: "Purchase tickets for your favorite events",
 };
 

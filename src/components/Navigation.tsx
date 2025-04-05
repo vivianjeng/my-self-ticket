@@ -16,7 +16,7 @@ export default function Navigation() {
               href="/"
               className="flex items-center text-xl font-bold text-indigo-600"
             >
-              TicketHub
+              My Self Ticket
             </Link>
           </div>
           <div className="flex items-center space-x-4">

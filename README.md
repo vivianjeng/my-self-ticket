@@ -1,38 +1,37 @@
-# TicketHub - Event Ticket Selling Platform
+# My Self Ticket
 
-A modern web application for buying and selling event tickets. Built with Next.js, TypeScript, Tailwind CSS, and Stripe integration.
+To prevent ticket scalping and bots from snatching up tickets, many concert ticketing platforms in Taiwan require real-name registration. This means buyers must provide their national ID number and full name when purchasing tickets, and present their ID for verification at the event. However, this approach not only forces attendees to carry their ID to the concert, but also raises concerns about privacy and data exposure.
+
+In this project, we use the [**Self Protocol**](https://self.xyz/) to address the issues mentioned above. With Self Protocol, users can scan their own passport and securely store the passport data on their mobile device. When required to provide this information, users can generate a Zero-Knowledge (ZK) proof to authenticate the data without revealing sensitive details. As a result, users only need to bring the mobile device that has previously scanned the passport, attend the concert, scan the QR code provided by the event staff, and have their name and ticket ownership verified.
+
+## Technology
+
+1. [Self Protocol](https://self.xyz/): Self Protocol offers both a mobile app and a TypeScript SDK for building websites and enabling interaction with the mobile app. The website displays a QR code that the mobile app can scan, initiating a WebSocket session. Once the session is established, the mobile app generates a Zero-Knowledge (ZK) proof, which is processed by an endpoint defined in the SDK. The endpoint then handles the data and returns either a success or failure response.
 
 ## Features
 
-- User authentication (sign up, login, logout)
-- Browse available events
-- Select seats and purchase tickets
-- Secure payment processing with Stripe
-- View purchased tickets
-- Responsive design for all devices
+1. **Login:** Users can simply use the Self Protocol app to log in to the My Self Ticket website.
 
-## Tech Stack
+2. **Browse Events:** All concert events are displayed on the main page. By clicking on an event, you can view more details, including the date and seating information.
 
-- **Frontend:**
-  - Next.js 14
-  - TypeScript
-  - Tailwind CSS
-  - Shadcn/ui components
-  - React Hook Form
-  - Zustand (state management)
+3. **Buy Tickets:** After selecting the tickets, proceed to checkout to complete the purchase (WIP).
 
-- **Backend:**
-  - Next.js API Routes
-  - Prisma (ORM)
-  - PostgreSQL
-  - NextAuth.js
-  - Stripe
+4. **Verify Ticket:** There is a staff-only page available exclusively on the day of the event. This page can be accessed by appending `/qr` to the event URL, for example:
+
+```sh
+https://my-self-ticket-ethtaipei.vercel.app/events/cm94cxq2n00a3clvhaq8g47ek
+```
+
+becomes
+
+```sh
+https://my-self-ticket-ethtaipei.vercel.app/events/cm94cxq2n00a3clvhaq8g47ek/qr
+```
 
 ## Prerequisites
 
-- Node.js 18+ and npm/yarn
-- PostgreSQL database
-- Stripe account
+-   Node.js 18+ and npm/yarn
+-   PostgreSQL database
 
 ## Environment Variables
 
@@ -46,63 +45,31 @@ DATABASE_URL="postgresql://postgres:postgres@localhost:5432/ticket_selling?schem
 NEXTAUTH_URL="http://localhost:3000"
 NEXTAUTH_SECRET="your-nextauth-secret-key"
 
-# Stripe
-STRIPE_PUBLIC_KEY="your-stripe-public-key"
-STRIPE_SECRET_KEY="your-stripe-secret-key"
-STRIPE_WEBHOOK_SECRET="your-stripe-webhook-secret"
+# Self Protocol
+SELF_ENDPOINT=
+NEXT_PUBLIC_SELF_ENDPOINT=
 ```
 
 ## Getting Started
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/tickethub.git
-   cd tickethub
-   ```
+1. Install dependencies:
 
-2. Install dependencies:
-   ```bash
-   yarn install
-   ```
+    ```bash
+    yarn install
+    ```
 
-3. Set up the database:
-   ```bash
-   yarn prisma generate
-   yarn prisma db push
-   yarn prisma:seed
-   ```
+2. Set up the database:
 
-4. Start the development server:
-   ```bash
-   yarn dev
-   ```
+    ```bash
+    yarn prisma generate
+    yarn prisma db push
+    yarn prisma:seed
+    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+3. Start the development server:
 
-## Project Structure
+    ```bash
+    yarn dev
+    ```
 
-```
-src/
-├── app/                    # Next.js app directory
-│   ├── api/               # API routes
-│   ├── events/            # Event pages
-│   ├── login/             # Authentication pages
-│   ├── my-tickets/        # User tickets page
-│   └── success/           # Payment success page
-├── components/            # React components
-├── lib/                   # Utility functions and configurations
-├── providers/             # Context providers
-└── hooks/                 # Custom React hooks
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
