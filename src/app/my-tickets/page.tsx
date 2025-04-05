@@ -4,11 +4,18 @@ import { prisma } from '@/lib/prisma';
 import { redirect } from 'next/navigation';
 import { format } from 'date-fns';
 
+interface SessionUser {
+  id: string;
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+}
+
 async function getTickets(userId: string) {
   const tickets = await prisma.ticket.findMany({
     where: {
       userId,
-      status: 'SOLD',
+      status: 'UNAVAILABLE',
     },
     include: {
       event: true,
@@ -23,12 +30,13 @@ async function getTickets(userId: string) {
 
 export default async function MyTicketsPage() {
   const session = await getServerSession(authOptions);
+  const user = session?.user as SessionUser;
 
-  if (!session?.user) {
+  if (!user?.id) {
     redirect('/register');
   }
 
-  const tickets = await getTickets(session.user.id);
+  const tickets = await getTickets(user.id);
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -71,7 +79,7 @@ export default async function MyTicketsPage() {
                 </div>
                 <div className="mt-4 pt-4 border-t">
                   <p className="text-lg font-semibold">
-                    Status: <span className="text-green-600">SOLD</span>
+                    Status: <span className="text-green-600">Purchased</span>
                   </p>
                 </div>
               </div>

@@ -74,7 +74,8 @@ async function main() {
     },
   ];
 
-  // First, delete all existing events and tickets to avoid duplicates
+  // First, delete all existing data in the correct order to avoid foreign key constraints
+  await prisma.order.deleteMany();
   await prisma.ticket.deleteMany();
   await prisma.event.deleteMany();
 
@@ -98,7 +99,7 @@ async function main() {
     }
   }
 
-  // Create some sold tickets for the test user
+  // Create some unavailable tickets for the test user
   const testEvent = await prisma.event.findFirst();
   if (testEvent) {
     // Get 3 available tickets
@@ -110,7 +111,7 @@ async function main() {
       take: 3,
     });
 
-    // Update the tickets to sold status
+    // Update the tickets to unavailable status
     await prisma.ticket.updateMany({
       where: {
         id: {
@@ -118,7 +119,7 @@ async function main() {
         },
       },
       data: {
-        status: 'SOLD',
+        status: 'UNAVAILABLE',
         userId: user.id,
       },
     });

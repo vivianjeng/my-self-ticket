@@ -3,16 +3,16 @@ import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import SeatSelection from '@/components/SeatSelection';
-import PaymentForm from '@/components/PaymentForm';
 
 async function getEvent(id: string) {
   const event = await prisma.event.findUnique({
     where: { id },
     include: {
       tickets: {
-        where: {
-          status: 'AVAILABLE',
-        },
+        orderBy: [
+          { row: 'asc' },
+          { seatNumber: 'asc' }
+        ]
       },
     },
   });
@@ -60,10 +60,7 @@ export default async function EventPage({
         </div>
         <div>
           {session ? (
-            <>
-              <SeatSelection event={event} />
-              <PaymentForm event={event} />
-            </>
+            <SeatSelection event={event} />
           ) : (
             <div className="bg-yellow-50 p-4 rounded-lg">
               <p className="text-yellow-800">
