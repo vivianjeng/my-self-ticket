@@ -20,7 +20,7 @@ export async function POST(request: Request) {
 
         // Contract details
         const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-        const endpoint = "https://339e-122-99-30-134.ngrok-free.app/api/verify";
+        const endpoint = `${process.env.SELF_ENDPOINT}/api/verify`;
 
         // Uncomment this to use the Self backend verifier for offchain verification instead
         const selfdVerifier = new SelfBackendVerifier(

@@ -82,7 +82,7 @@ export default function RegisterPage() {
     const selfApp = new SelfAppBuilder({
         appName: "My Self Ticket",
         scope: "My-Self-Ticket",
-        endpoint: "https://339e-122-99-30-134.ngrok-free.app/api/verify",
+        endpoint: `${process.env.NEXT_PUBLIC_SELF_ENDPOINT}/api/verify`,
         endpointType: "https",
         logoBase64: "https://i.imgur.com/Rz8B3s7.png",
         userId,
