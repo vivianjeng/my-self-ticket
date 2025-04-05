@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { SelfBackendVerifier } from '@selfxyz/core';
+import { getUserIdentifier, SelfBackendVerifier } from '@selfxyz/core';
+import { abi } from '@/app/content/abi';
+import { ethers } from 'ethers';
 
 interface VerificationResult {
     status: 'success' | 'error';
@@ -46,6 +48,27 @@ export async function POST(request: Request) {
         if (!result.credentialSubject.passport_number) {
             return NextResponse.json({ message: 'Passport number not found in verification result' }, { status: 400 });
         }
+
+        const contractAddress = process.env.CONTRACT_ADDRESS;
+        if (!contractAddress) {
+            return NextResponse.json({ message: 'Contract address not found' }, { status: 400 });
+        }
+        const address = await getUserIdentifier(publicSignals, "hex");
+        const provider = new ethers.JsonRpcProvider(process.env.RPC_URL);
+        const signer = new ethers.Wallet(process.env.PRIVATE_KEY!, provider);
+        const contract = new ethers.Contract(contractAddress, abi, signer);
+
+        const tx = await contract.verifySelfProof({
+            a: proof.a,
+            b: [
+              [proof.b[0][1], proof.b[0][0]],
+              [proof.b[1][1], proof.b[1][0]],
+            ],
+            c: proof.c,
+            pubSignals: publicSignals,
+        });
+        await tx.wait();
+        console.log("Successfully called verifySelfProof function");
 
         const passportNumber = JSON.stringify(result.credentialSubject.passport_number)
         console.log("Decoded passport number:", passportNumber);

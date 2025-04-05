@@ -17,11 +17,6 @@ export const abi = [
         "type": "uint256"
       },
       {
-        "internalType": "address",
-        "name": "_token",
-        "type": "address"
-      },
-      {
         "internalType": "bool",
         "name": "_olderThanEnabled",
         "type": "bool"
@@ -52,42 +47,12 @@ export const abi = [
   },
   {
     "inputs": [],
-    "name": "INSUFFICIENT_CHARCODE_LEN",
-    "type": "error"
-  },
-  {
-    "inputs": [],
     "name": "InvalidAttestationId",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "InvalidDateLength",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "InvalidDayRange",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "InvalidFieldElement",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "InvalidMonthRange",
-    "type": "error"
-  },
-  {
-    "inputs": [],
     "name": "InvalidScope",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "InvalidYearRange",
     "type": "error"
   },
   {
@@ -118,17 +83,6 @@ export const abi = [
     "type": "error"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      }
-    ],
-    "name": "SafeERC20FailedOperation",
-    "type": "error"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -145,25 +99,6 @@ export const abi = [
       }
     ],
     "name": "OwnershipTransferred",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "claimer",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "USDCClaimed",
     "type": "event"
   },
   {
@@ -200,19 +135,6 @@ export const abi = [
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "usdc",
-    "outputs": [
-      {
-        "internalType": "contract IERC20",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "components": [
@@ -244,25 +166,7 @@ export const abi = [
     ],
     "name": "verifySelfProof",
     "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "withdrawUSDC",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   }
 ]
