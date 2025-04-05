@@ -10,36 +10,36 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: 'credentials',
       credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' }
+        passportNumber: { label: 'Passport Number', type: 'text' },
+        dateOfBirth: { label: 'Date of Birth', type: 'text' }
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
+        if (!credentials?.passportNumber || !credentials?.dateOfBirth) {
           throw new Error('Invalid credentials');
         }
 
         const user = await prisma.user.findUnique({
           where: {
-            email: credentials.email
+            passportNumber: credentials.passportNumber,
           }
         });
 
-        if (!user || !user.password) {
+        if (!user || !user.dateOfBirth) {
           throw new Error('Invalid credentials');
         }
 
-        const isCorrectPassword = await bcrypt.compare(
-          credentials.password,
-          user.password
+        const isCorrectDateOfBirth = await bcrypt.compare(
+          credentials.dateOfBirth,
+          user.dateOfBirth
         );
 
-        if (!isCorrectPassword) {
+        if (!isCorrectDateOfBirth) {
           throw new Error('Invalid credentials');
         }
 
         return {
           id: user.id,
-          email: user.email,
+          passportNumber: user.passportNumber,
           name: user.name,
         };
       }
@@ -49,7 +49,7 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt'
   },
   pages: {
-    signIn: '/login',
+    signIn: '/register',
   },
   callbacks: {
     async jwt({ token, user }) {

@@ -5,6 +5,7 @@ import { useSession, signOut } from 'next-auth/react';
 
 export default function Navigation() {
   const { data: session } = useSession();
+  console.log(session);
 
   return (
     <nav className="bg-white shadow-sm">
@@ -37,16 +38,10 @@ export default function Navigation() {
             ) : (
               <>
                 <Link
-                  href="/login"
-                  className="text-gray-700 hover:text-indigo-600"
-                >
-                  Sign In
-                </Link>
-                <Link
                   href="/register"
                   className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700"
                 >
-                  Sign Up
+                  Log in
                 </Link>
               </>
             )}

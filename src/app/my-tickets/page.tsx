@@ -25,7 +25,7 @@ export default async function MyTicketsPage() {
   const session = await getServerSession(authOptions);
 
   if (!session?.user) {
-    redirect('/login');
+    redirect('/register');
   }
 
   const tickets = await getTickets(session.user.id);
