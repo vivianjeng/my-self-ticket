@@ -3,6 +3,19 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 
+interface SessionUser {
+  id: string;
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+}
+
+declare module "next-auth" {
+  interface Session {
+    user: SessionUser;
+  }
+}
+
 const handler = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -45,7 +58,8 @@ const handler = NextAuth({
     strategy: "jwt"
   },
   pages: {
-    signUp: "/register",
+    signIn: "/register",
+    // signUp: "/register",
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -55,7 +69,7 @@ const handler = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      if (session.user) {
+      if (session.user as SessionUser) {
         session.user.id = token.id as string;
       }
       return session;

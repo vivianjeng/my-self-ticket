@@ -4,12 +4,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import SeatSelection from "@/components/SeatSelection";
 
-type Props = {
-    params: {
-        id: string;
-    };
-    searchParams: { [key: string]: string | string[] | undefined };
-};
 
 async function getEvent(id: string) {
     const event = await prisma.event.findUnique({
@@ -28,8 +22,8 @@ async function getEvent(id: string) {
     return event;
 }
 
-
-export default async function EventPage({ params }: Props) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function EventPage({ params }: any) {
     const event = await getEvent(params.id);
     const session = await getServerSession(authOptions);
 

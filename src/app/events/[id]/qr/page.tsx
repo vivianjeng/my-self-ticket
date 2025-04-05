@@ -14,7 +14,8 @@ interface VerificationResult {
     publicSignals: string[];
 }
 
-export default function QRCodePage({ params }: { params: { id: string } }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function QRCodePage({ params }: any) {
     const router = useRouter();
     const [verificationResult] =
         useState<VerificationResult | null>(null);
