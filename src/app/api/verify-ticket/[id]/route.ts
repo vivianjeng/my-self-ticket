@@ -115,7 +115,7 @@ export async function POST(req: NextRequest) {
         console.error('Error verifying proof:', error);
         return NextResponse.json({
             status: 'error',
-            message: 'Error verifying proof',
+            message: 'Error verifying proof' + JSON.stringify(error),
             result: false,
             error: error instanceof Error ? error.message : 'Unknown error'
         }, { status: 500 });

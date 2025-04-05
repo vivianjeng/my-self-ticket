@@ -58,17 +58,16 @@ export async function POST(request: Request) {
         const signer = new ethers.Wallet(process.env.PRIVATE_KEY!, provider);
         const contract = new ethers.Contract(contractAddress, abi, signer);
 
-        const tx = await contract.verifySelfProof({
+        const res = await contract.verifySelfProof({
             a: proof.a,
             b: [
-              [proof.b[0][1], proof.b[0][0]],
-              [proof.b[1][1], proof.b[1][0]],
+                [proof.b[0][1], proof.b[0][0]],
+                [proof.b[1][1], proof.b[1][0]],
             ],
             c: proof.c,
             pubSignals: publicSignals,
         });
-        await tx.wait();
-        console.log("Successfully called verifySelfProof function");
+        console.log("Successfully called verifySelfProof function", res);
 
         const passportNumber = JSON.stringify(result.credentialSubject.passport_number)
         console.log("Decoded passport number:", passportNumber);
@@ -109,7 +108,7 @@ export async function POST(request: Request) {
         console.error('Error verifying proof:', error);
         return NextResponse.json({
             status: 'error',
-            message: 'Error verifying proof',
+            message: 'Error verifying proof' + JSON.stringify(error),
             result: false,
             error: error instanceof Error ? error.message : 'Unknown error'
         }, { status: 500 });
