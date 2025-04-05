@@ -14,6 +14,14 @@ In this project, we use the [**Self Protocol**](https://self.xyz/) to address th
         - Celo Mainnet: [0xF4205f466De67CA37d820504eb3c81bb89081214](https://celoscan.io/address/0xF4205f466De67CA37d820504eb3c81bb89081214)
         - Cele Alfajores:[0x9C060e2200dF127cAb5E3d5Cc5824292604c1391](https://alfajores.celoscan.io/address/0x9C060e2200dF127cAb5E3d5Cc5824292604c1391)
 
+3. [Polygon](https://polygon.technology/): Polygon is also a public blockchain that not only stores data but also supports on-chain verification of zk-proofs, allowing anyone to verify the correctness of the proof. Though it doesn't support [`IdentityVerificationHub` deployment by default](https://docs.self.xyz/contract-integration/deployed-contracts), we can still deploy these contracts with [Deployment instructions](https://github.com/selfxyz/self/blob/main/contracts/README.md#deployments).
+    - The contract repository:https://github.com/vivianjeng/my-self-ticket-contract
+    - The contract is deployed at:
+        - Polygon Amoy: 
+            - DeployHub#IdentityVerificationHubImplV1 - [0xDff0E2480a9528a2cD7A482C492b42510FeeEc4D](https://amoy.polygonscan.com/address/0xDff0E2480a9528a2cD7A482C492b42510FeeEc4D)
+            - DeployHub#IdentityVerificationHub - [0x62F114d7AA792864c2CE340c4b03F967c94DE6E4](https://amoy.polygonscan.com/address/0x62F114d7AA792864c2CE340c4b03F967c94DE6E4)
+            - MySelfTicket: [0xE76f72F976913dB1acE6B127F60dC2AB10C60633](https://amoy.polygonscan.com/address/0xE76f72F976913dB1acE6B127F60dC2AB10C60633)
+
 ## Features
 
 1. **Login:** Users can simply use the Self Protocol app to log in to the My Self Ticket website.
