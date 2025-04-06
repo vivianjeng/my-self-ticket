@@ -62,6 +62,11 @@ NEXTAUTH_SECRET="your-nextauth-secret-key"
 # Self Protocol
 SELF_ENDPOINT=
 NEXT_PUBLIC_SELF_ENDPOINT=
+
+# Ethereum
+PRIVATE_KEY=
+RPC_URL=
+CONTRACT_ADDRESS=
 ```
 
 ## Getting Started
